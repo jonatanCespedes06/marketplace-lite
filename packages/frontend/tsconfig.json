@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@marketplace/*": ["packages/*/src"]
+    },
+    "jsx": "react-jsx",
+    "moduleResolution": "NodeNext",
+    "sourceMap": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "references": [
+    { "path": "../shared" }
+  ],
+  "exclude": ["node_modules", "dist"]
+}

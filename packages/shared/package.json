@@ -1,0 +1,19 @@
+{
+  "name": "@marketplace/shared",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "exports": {
+    "./types": "./src/types/index.ts",
+    "./constants": "./src/constants/index.ts",
+    "./validators": "./src/validators/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  }
+}

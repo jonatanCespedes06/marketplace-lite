@@ -1,0 +1,35 @@
+{
+  "name": "marketplace-lite",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "packageManager": "pnpm@12.3.4",
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
+    "test:coverage": "turbo run test:coverage",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean",
+    "sdd:generate": "pnpm -r sdd:generate",
+    "sdd:validate": "pnpm -r sdd:validate",
+    "sdd:close": "pnpm -r sdd:close",
+    "prepare": "husky install",
+    "lint:staged": "lint-staged"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.3.2",
+    "eslint": "^9.13.0",
+    "@eslint/js": "^9.13.0",
+    "@typescript-eslint/parser": "^8.11.0",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "eslint-config-prettier": "^9.0.0"
+  }
+}

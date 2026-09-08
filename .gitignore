@@ -1,0 +1,7 @@
+.husky/_/
+*.log
+.DS_Store
+coverage/
+dist/
+.turbo/
+node_modules/
