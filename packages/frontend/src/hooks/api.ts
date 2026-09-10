@@ -4,9 +4,17 @@ import api from '../api/client';
 export interface Product {
   id: string;
   name: string;
-  description: string;
   price: number;
+  sku: string;
+  description: string;
   category: string;
+  stock: number;
+}
+
+export interface CreateProductInput {
+  name: string;
+  price: number;
+  sku: string;
   stock: number;
 }
 
@@ -29,11 +37,29 @@ export function useProducts(page = 1, limit = 10) {
   const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await api.get<PaginatedResponse<Product>>('/product-catalog', {
+      const response = await api.get<PaginatedResponse<Product> | Product[]>('/product-catalog', {
         params: { page, limit },
       });
-      setProducts(response.data.data);
-      setMeta(response.data.meta);
+      // Tolerate both the { data, meta } envelope and a bare array (legacy shape).
+      const payload = response.data as PaginatedResponse<Product> | Product[] | null | undefined;
+      const rawItems = Array.isArray(payload) ? payload : (payload?.data ?? []);
+      const items = (Array.isArray(rawItems) ? rawItems : []).map((p) => ({
+        id: String((p as Product).id ?? ''),
+        name: String((p as Product).name ?? 'Untitled product'),
+        price: Number((p as Product).price ?? 0),
+        sku: String((p as Product).sku ?? ''),
+        description: String((p as Product).description ?? ''),
+        category: String((p as Product).category ?? (p as Product).sku ?? 'General'),
+        stock: typeof (p as Product).stock === 'number' ? (p as Product).stock as number : 0,
+      }));
+      const rawMeta = !Array.isArray(payload) ? payload?.meta : undefined;
+      setProducts(items);
+      setMeta({
+        total: Number(rawMeta?.total ?? items.length),
+        page: Number(rawMeta?.page ?? page),
+        limit: Number(rawMeta?.limit ?? limit),
+        totalPages: Number(rawMeta?.totalPages ?? 1),
+      });
       setError(null);
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to fetch products');
@@ -53,7 +79,7 @@ export function useCreateProduct() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createProduct = async (productData: Omit<Product, 'id'>) => {
+  const createProduct = async (productData: CreateProductInput) => {
     setLoading(true);
     try {
       const response = await api.post<Product>('/product-catalog', productData);
@@ -75,14 +101,11 @@ export interface CheckoutInput {
   shippingAddress: {
     street: string;
     city: string;
-    state: string;
-    zipCode: string;
+    postalCode: string;
     country: string;
   };
-  paymentMethod: {
-    type: 'CREDIT_CARD';
-    token: string;
-  };
+  paymentMethod: 'credit_card' | 'debit_card' | 'bank_transfer' | 'paypal';
+  paymentDetails: Record<string, unknown>;
 }
 
 export function useCheckout() {

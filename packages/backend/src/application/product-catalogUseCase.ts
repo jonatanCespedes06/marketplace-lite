@@ -7,6 +7,7 @@ const createProductSchema = z.object({
   name: z.string().min(3),
   price: z.number().positive(),
   sku: z.string().regex(/^[A-Z]{3}-\d{4}$/),
+  stock: z.number().int().nonnegative(),
 });
 
 const productDtoSchema = z.object({
@@ -14,6 +15,7 @@ const productDtoSchema = z.object({
   name: z.string().min(3),
   price: z.number().positive(),
   sku: z.string().regex(/^[A-Z]{3}-\d{4}$/),
+  stock: z.number().int().nonnegative(),
 });
 
 type CreateProductInput = z.infer<typeof createProductSchema>;
@@ -28,8 +30,8 @@ interface ListProductsInput {
 
 type ListProductsError = { message: string };
 
-type ListProductsResult = 
-  | { ok: true; data: ProductDTO[]; meta: { page: number; limit: number; total: number } }
+type ListProductsResult =
+  | { ok: true; data: ProductDTO[]; meta: { page: number; limit: number; total: number; totalPages: number } }
   | { ok: false; error: ListProductsError };
 
 interface CreateProductOutput {
@@ -59,6 +61,7 @@ export class ProductCatalogUseCase {
     try {
       const page = input.page ?? 1;
       const limit = input.limit ?? 10;
+      const all = await this.repository.findAll();
       const items = await this.repository.findAll({ page, limit });
       const dtoItems: ProductDTO[] = items.map((item: ProductCatalogEntity) =>
         productDtoSchema.parse({
@@ -66,12 +69,13 @@ export class ProductCatalogUseCase {
           name: item.name,
           price: item.price,
           sku: item.sku,
+          stock: item.stock,
         }),
       );
       return {
         ok: true,
         data: dtoItems,
-        meta: { page, limit: dtoItems.length, total: items.length },
+        meta: { page, limit, total: all.length, totalPages: Math.max(1, Math.ceil(all.length / limit)) },
       };
     } catch (error) {
       return {
@@ -97,6 +101,7 @@ export class ProductCatalogUseCase {
       name: validation.data.name,
       price: validation.data.price,
       sku: validation.data.sku,
+      stock: validation.data.stock,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -106,6 +111,7 @@ export class ProductCatalogUseCase {
       name: created.name,
       price: created.price,
       sku: created.sku,
+      stock: created.stock,
     });
     return {
       ok: true,
@@ -126,6 +132,7 @@ export class ProductCatalogUseCase {
       name: product.name,
       price: product.price,
       sku: product.sku,
+      stock: product.stock,
     });
     return {
       ok: true,

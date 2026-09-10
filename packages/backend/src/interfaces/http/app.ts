@@ -6,7 +6,9 @@ import type { Express } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
+import { join } from 'node:path';
 import { ProductCatalogController } from '../../infrastructure/product-catalogController.js';
+import { JsonFileProductCatalogRepository } from '../../infrastructure/product-catalogJsonRepository.js';
 import {
   InMemoryCartRepository,
   InMemoryEventBus,
@@ -63,7 +65,27 @@ export const createApp = (deps: AppDeps = { checkout: createCheckoutDeps() }): E
     res.status(200).json({ status: 'ok' });
   });
 
-  ProductCatalogController(app);
+  // The default wiring uses the in-memory inventory, which supports seeding.
+  // The cast lives here in the composition root so domain ports stay pure.
+  const inventory = deps.checkout.inventory as unknown as {
+    seed(product: { id: string; name: string; sku: string; unitPrice: number; stock: number }): void;
+  };
+  // File-backed catalog so products (and the mock seed) survive restarts.
+  // Override with PRODUCT_CATALOG_FILE; defaults to ./data/product-catalog.json.
+  const catalogFile =
+    process.env.PRODUCT_CATALOG_FILE ?? join(process.cwd(), 'data', 'product-catalog.json');
+  const catalogRepository = new JsonFileProductCatalogRepository(catalogFile);
+  ProductCatalogController(app, { inventory, repository: catalogRepository });
+  // Publish the persisted catalog into inventory so carts work after a restart.
+  for (const product of catalogRepository.getSnapshot()) {
+    inventory.seed({
+      id: product.id,
+      name: product.name,
+      sku: product.sku,
+      unitPrice: product.price,
+      stock: product.stock,
+    });
+  }
   registerCheckoutRoutes(app, deps.checkout);
 
   return app;

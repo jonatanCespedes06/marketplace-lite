@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ec9c96c2-5c6d-4c34-bd08-77eb7cff5759",
+    "name": "Wireless Headphones",
+    "price": 89.99,
+    "sku": "AUD-1001",
+    "stock": 15,
+    "createdAt": "2026-09-10T04:46:23.075Z",
+    "updatedAt": "2026-09-10T04:46:23.075Z"
+  },
+  {
+    "id": "16b274be-10a1-4b21-a8c3-ca4d2c20cf0e",
+    "name": "Mechanical Keyboard",
+    "price": 129.5,
+    "sku": "AUD-1002",
+    "stock": 8,
+    "createdAt": "2026-09-10T04:46:23.075Z",
+    "updatedAt": "2026-09-10T04:46:23.075Z"
+  },
+  {
+    "id": "35b514bb-8f01-463d-9c43-4ed9e6d0d7ee",
+    "name": "Ergonomic Mouse",
+    "price": 45,
+    "sku": "AUD-1003",
+    "stock": 20,
+    "createdAt": "2026-09-10T04:46:23.075Z",
+    "updatedAt": "2026-09-10T04:46:23.075Z"
+  },
+  {
+    "id": "64202a61-2647-4b8a-af00-17bbef2b0c47",
+    "name": "4K Monitor 27\"",
+    "price": 349.99,
+    "sku": "MON-2001",
+    "stock": 5,
+    "createdAt": "2026-09-10T04:46:23.075Z",
+    "updatedAt": "2026-09-10T04:46:23.075Z"
+  },
+  {
+    "id": "a045d1ee-ca91-4e40-a6e2-46808069848e",
+    "name": "Desk Lamp",
+    "price": 29.99,
+    "sku": "LMP-3001",
+    "stock": 30,
+    "createdAt": "2026-09-10T04:46:23.075Z",
+    "updatedAt": "2026-09-10T04:46:23.075Z"
+  },
+  {
+    "id": "e546c806-7905-4e11-a392-d288044b851d",
+    "name": "Laptop Stand",
+    "price": 39.95,
+    "sku": "ACC-4001",
+    "stock": 12,
+    "createdAt": "2026-09-10T04:46:23.075Z",
+    "updatedAt": "2026-09-10T04:46:23.075Z"
+  },
+  {
+    "id": "487ef9ff-144c-4cce-9a7d-c7952f48cf76",
+    "name": "HD Webcam",
+    "price": 69,
+    "sku": "CAM-5001",
+    "stock": 0,
+    "createdAt": "2026-09-10T04:46:23.075Z",
+    "updatedAt": "2026-09-10T04:46:23.075Z"
+  },
+  {
+    "id": "0d066f9c-9069-4f89-93fa-0bc6ce4cc172",
+    "name": "Office Chair",
+    "price": 199,
+    "sku": "CHR-6001",
+    "stock": 4,
+    "createdAt": "2026-09-10T04:46:23.075Z",
+    "updatedAt": "2026-09-10T04:46:23.075Z"
+  }
+]
