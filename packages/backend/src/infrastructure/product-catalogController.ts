@@ -37,7 +37,7 @@ export function ProductCatalogController(app: Express) {
   // GET /product-catalog/:id - Get product by ID
   app.get("/product-catalog/:id", async (req: Request, res: Response) => {
     try {
-      const result = await useCase.getProductById(req.params.id);
+      const result = await useCase.getProductById(req.params.id ?? "");
       if (!result.ok) {
         return res.status(404).json({ error: result.error.message });
       }
