@@ -2,8 +2,8 @@
   "compilerOptions": {
     "strict": true,
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,11 +13,12 @@
       "@marketplace/*": ["packages/*/src"]
     },
     "jsx": "react-jsx",
-    "moduleResolution": "NodeNext",
     "sourceMap": true,
     "allowImportingTsExtensions": true,
+    "types": ["vite/client"],
     "noEmit": true
   },
+  "include": ["src"],
   "references": [
     { "path": "../shared" }
   ],
