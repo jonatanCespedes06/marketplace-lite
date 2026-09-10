@@ -1,5 +1,7 @@
 # Product Catalog - Technical Specification
 
+> Nota demo (código manda): rutas reales `/product-catalog` (no `/products`). `GET /product-catalog → {data, meta{page,limit,total,totalPages}}`, `POST /product-catalog → 201 <plano>` (sin envelope `{data}`), `GET /product-catalog/:id → <plano>` (sin `{data}`). Modelo real exige `stock:int>=0` y frontend usa `description/category` extra (fuera de spec). Sin auth/rol admin, sin `409 SKU duplicado`, sin `400` por paginación inválida (usa `Number(q)||1`). Persistencia `InMemory` + `JsonFile` (sin Prisma/Postgres). No hay búsqueda case-insensitive. Post-demo alinear código a spec. Código congelado para demo.
+
 ## API Contracts
 
 ### GET /products

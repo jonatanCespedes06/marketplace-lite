@@ -1,5 +1,7 @@
 # Checkout - Technical Specification
 
+> Nota demo (código manda): implementación actual usa auth stub `Bearer cualquiera` (sin verificar JWT), persistencia `InMemory` + `JsonFile` (sin Prisma/Postgres/migraciones), `MockPaymentGateway`/`NoopEmailService`/`InMemoryEventBus`. Endpoints extra no espec pero implementados: `PATCH /cart/items/:productId` (UpdateCartItem) y `PATCH /orders/:id/status` (admin/webhook). `POST /checkout` hace `reserve → Order.create → charge → save → save(clear)` con `releaseStock` en fallo (sin `confirmStock`, `clear` ≠ `delete`). `GET /orders` hace clamp a `page=1/limit=10/max50` en vez de `400` ante paginación inválida. Post-demo alinear código a spec. Código congelado para demo.
+
 ## API Contracts
 
 ### POST /cart/items

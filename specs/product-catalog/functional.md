@@ -1,5 +1,7 @@
 # Product Catalog - Functional Specification
 
+> Alcance demo: crear/listar por `/product-catalog` con `stock` requerido. Sin control admin, sin `409` duplicado. Evitar en demo: SKU duplicado, validación límite.
+
 ## Historias de Usuario
 
 ### HC-001: Listar productos

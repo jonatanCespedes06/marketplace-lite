@@ -1,5 +1,7 @@
 # Checkout - Functional Specification
 
+> Alcance demo: frontend solo demuestra `Agregar al carrito → Ver carrito → Checkout` (happy path). `HC-003` historial/detalle órdenes solo vía API (`GET /orders`), sin UI. Evitar en demo: stock insuficiente, pago fallido, paginación inválida, JWT.
+
 ## Historias de Usuario
 
 ### HC-001: Gestionar carrito de compras

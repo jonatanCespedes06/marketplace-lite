@@ -90,21 +90,28 @@ const Checkout: React.FC = () => {
         <section className="panel">
           <h2>Order summary</h2>
           <ul className="cart-list">
-            {cart.items.map((item: any) => (
-              <li key={item.productId}>
-                <span>
-                  <strong>{item.name}</strong>
-                  <span className="muted"> × {item.quantity}</span>
-                </span>
-                <span>
-                  <strong>${(item.price * item.quantity).toFixed(2)}</strong>
-                </span>
-              </li>
-            ))}
+            {cart.items.map((item: any) => {
+              const name = item.productName ?? item.name ?? 'Product';
+              const quantity = Number(item.quantity ?? 0);
+              const fallbackUnit = quantity ? Number(item.subtotal) / quantity : 0;
+              const unitPrice = Number(item.unitPrice ?? item.price ?? fallbackUnit);
+              const lineTotal = Number(item.subtotal ?? unitPrice * quantity);
+              return (
+                <li key={item.productId}>
+                  <span>
+                    <strong>{name}</strong>
+                    <span className="muted"> × {quantity}</span>
+                  </span>
+                  <span>
+                    <strong>${lineTotal.toFixed(2)}</strong>
+                  </span>
+                </li>
+              );
+            })}
           </ul>
           <div className="cart-total">
             <span>Total</span>
-            <strong>${Number(cart.totalPrice).toFixed(2)}</strong>
+            <strong>${Number(cart.total ?? cart.totalPrice ?? 0).toFixed(2)}</strong>
           </div>
         </section>
 
@@ -145,7 +152,7 @@ const Checkout: React.FC = () => {
             className="btn btn-primary btn-block"
             style={{ marginTop: 16 }}
           >
-            {checkoutLoading ? 'Processing…' : `Place order · $${Number(cart.totalPrice).toFixed(2)}`}
+            {checkoutLoading ? 'Processing…' : `Place order · $${Number(cart.total ?? cart.totalPrice ?? 0).toFixed(2)}`}
           </button>
         </section>
       </div>
