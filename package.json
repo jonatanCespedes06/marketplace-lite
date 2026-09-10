@@ -1,7 +1,9 @@
 {
   "name": "marketplace-lite",
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "packageManager": "pnpm@12.3.4",
   "scripts": {
     "dev": "turbo run dev --parallel",
@@ -12,9 +14,11 @@
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "clean": "turbo run clean",
+    "sdd:start": "node scripts/sdd-start.js",
     "sdd:generate": "pnpm -r sdd:generate",
     "sdd:validate": "pnpm -r sdd:validate",
     "sdd:close": "pnpm -r sdd:close",
+    "sdd:new": "pnpm sdd:start && pnpm sdd:generate && pnpm sdd:validate",
     "prepare": "husky install",
     "lint:staged": "lint-staged"
   },
@@ -22,14 +26,19 @@
     "node": ">=20",
     "pnpm": ">=9"
   },
+  "lint-staged": {
+    "**/*.{ts,tsx}": "eslint --fix"
+  },
   "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "@typescript-eslint/parser": "^8.11.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.0",
     "prettier": "^3.3.2",
-    "eslint": "^9.13.0",
-    "@eslint/js": "^9.13.0",
-    "@typescript-eslint/parser": "^8.11.0",
-    "@typescript-eslint/eslint-plugin": "^8.11.0",
-    "eslint-config-prettier": "^9.0.0"
+    "turbo": "^2.10.0",
+    "typescript-eslint": "^8.70.0"
   }
 }

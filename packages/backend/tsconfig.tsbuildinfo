@@ -1,1 +1,1 @@
-{"root":["./src/index.ts"],"version":"5.9.3"}
+{"root":["./src/app.ts","./src/index.ts","./src/application/product-catalogusecase.ts","./src/domain/index.ts","./src/domain/product-catalog.ts","./src/domain/product-catalogrepository.ts","./src/infrastructure/product-catalogcontroller.ts","./src/infrastructure/product-catalogrepositoryimpl.ts"],"version":"5.9.3"}

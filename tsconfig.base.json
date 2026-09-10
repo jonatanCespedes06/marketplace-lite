@@ -8,9 +8,14 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "allowJs": false,
+    "checkJs": false,
+    "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
       "@marketplace/*": ["packages/*/src"]
     }
-  }
+  },
+  "exclude": ["node_modules", "**/dist", "**/*.js", "**/*.d.ts"]
 }

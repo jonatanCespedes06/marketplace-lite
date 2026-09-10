@@ -11,7 +11,10 @@
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint .",
-    "typecheck": "tsc -b"
+    "typecheck": "tsc -b",
+    "sdd:generate": "node ../../scripts/sdd-generate-backend.js",
+    "sdd:validate": "node ../../scripts/sdd-validate-backend.js",
+    "sdd:close": "node ../../scripts/sdd-close-backend.js"
   },
   "dependencies": {
     "express": "^4.19.2",
