@@ -70,5 +70,23 @@
     "stock": 4,
     "createdAt": "2026-09-10T04:46:23.075Z",
     "updatedAt": "2026-09-10T04:46:23.075Z"
+  },
+  {
+    "id": "34571ffa-61e5-44e3-8b01-bc203fb5d821",
+    "name": "Notebook Falsa 123",
+    "price": 11,
+    "sku": "ASD-1234",
+    "stock": 2,
+    "createdAt": "2026-09-10T21:27:47.527Z",
+    "updatedAt": "2026-09-10T21:27:47.527Z"
+  },
+  {
+    "id": "f77f190f-bcbf-418a-8c8d-45e290ae8d49",
+    "name": "Test",
+    "price": 11,
+    "sku": "ASD-1232",
+    "stock": 1,
+    "createdAt": "2026-09-10T21:43:13.169Z",
+    "updatedAt": "2026-09-10T21:43:13.169Z"
   }
 ]
