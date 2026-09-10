@@ -2,12 +2,15 @@
   "name": "@marketplace/shared",
   "version": "0.1.0",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
+    ".": "./dist/index.js",
     "./types": "./src/types/index.ts",
     "./constants": "./src/constants/index.ts",
     "./validators": "./src/validators/index.ts"
   },
   "scripts": {
+    "build": "tsc -b",
     "typecheck": "tsc -b"
   },
   "dependencies": {

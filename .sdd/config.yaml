@@ -1,0 +1,41 @@
+# Spec-Driven Development configuration (Marketplace Lite)
+version: 1
+
+paths:
+  specs: specs/
+  rules: .agentic-rules/
+  templates: .sdd/templates/
+  backend: packages/backend/src/
+  frontend: packages/frontend/src/
+  shared: packages/shared/src/
+  scripts: scripts/
+
+features:
+  required_files:
+    - functional.md
+    - technical.md
+    - tasks.md
+
+templates:
+  functional: templates/functional-spec.md
+  technical: templates/technical-spec.md
+  tasks: templates/tasks.md
+
+validation:
+  rules:
+    - architecture.md
+    - coding-standards.md
+    - testing.md
+    - security.md
+  require_zoned_inputs: true
+  require_result_pattern: true
+  forbid_domain_framework_imports:
+    - express
+    - vite
+    - react
+
+workflows:
+  start: node scripts/sdd-start.js
+  generate: node scripts/sdd-generate-backend.js
+  validate: node scripts/sdd-validate-backend.js
+  close: node scripts/sdd-close-backend.js
